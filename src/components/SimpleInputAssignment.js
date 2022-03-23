@@ -1,17 +1,16 @@
 import { useState } from "react";
 
-const SimpleInput = (props) => {
+const SimpleInputAssignment = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
-
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
 
   const enteredNameIsValid = enteredName.trim() !== "";
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-
-  const enteredEmailIsValid = enteredEmail.includes("@");
-  const enteredEmailIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
+  const enteredEmailIsValid =
+    enteredEmail.trim() !== "" && enteredEmail.trim().includes("@");
+  const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
 
   let formIsValid = false;
 
@@ -51,16 +50,11 @@ const SimpleInput = (props) => {
     // nameInputRef.current.value = "" => NOT IDEAL, DON'T MANIPULATE THE DOM
     setEnteredName("");
     setEnteredNameTouched(false);
-
     setEnteredEmail("");
     setEnteredEmailTouched(false);
   };
 
-  const nameInputClasses = nameInputIsInvalid
-    ? "form-control invalid"
-    : "form-control";
-
-  const emailInputClasses = enteredEmailIsInvalid
+  const nameInputClasses = nameInputIsInvalid && emailInputIsInvalid
     ? "form-control invalid"
     : "form-control";
 
@@ -78,8 +72,7 @@ const SimpleInput = (props) => {
         {nameInputIsInvalid && (
           <p className="error-text">Name must not be empty.</p>
         )}
-      </div>
-      <div className={emailInputClasses}>
+
         <label htmlFor="email">Your E-Mail</label>
         <input
           type="email"
@@ -88,8 +81,8 @@ const SimpleInput = (props) => {
           onBlur={emailInputBlurHandler}
           value={enteredEmail}
         />
-        {enteredEmailIsInvalid && (
-          <p className="error-text">Please enter a valid email.</p>
+        {emailInputIsInvalid && (
+          <p className="error-text">E-mail must have a valid e-mail format</p>
         )}
       </div>
       <div className="form-actions">
@@ -99,4 +92,4 @@ const SimpleInput = (props) => {
   );
 };
 
-export default SimpleInput;
+export default SimpleInputAssignment;
