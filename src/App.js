@@ -1,11 +1,13 @@
-import SimpleInput from './components/SimpleInput';
-import SimpleInputAssignment from './components/SimpleInputAssignment';
+// import SimpleInput from "./components/SimpleInput";
+// import SimpleInputAssignment from "./components/SimpleInputAssignment";
+import BasicForm from "./components/BasicForm";
 
 function App() {
   return (
     <div className="app">
-      <SimpleInput />
+      {/* <SimpleInput /> */}
       {/* <SimpleInputAssignment /> */}
+      <BasicForm />
     </div>
   );
 }
